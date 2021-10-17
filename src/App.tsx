@@ -1,18 +1,11 @@
-import React, { useEffect } from 'react';
-import { getCampaignResults } from './data/campaign-result.repository';
+import React from 'react';
+import Dashboard from './containers/Dashboard';
 
-function App() {
-
-  useEffect(() => {
-    (async () => {
-      const result = await getCampaignResults();
-      console.log(result);
-    })();
-  }, []);
+function App(): JSX.Element {
 
   return (
     <div className="App">
-      <p>initial commit</p>
+      <Dashboard />
     </div>
   );
 }

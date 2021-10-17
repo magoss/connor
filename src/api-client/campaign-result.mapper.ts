@@ -2,7 +2,7 @@ import parseDate from 'date-fns/parse';
 import {zonedTimeToUtc} from 'date-fns-tz';
 import { CampaignResultColumns } from './campaign-result-columns';
 
-export const mapCampaignResult = (value: string, header: string): string|number => {
+export const mapCampaignResult = (value: string, header: string): string | number => {
   if (header === CampaignResultColumns.Date) {
     let UTCDate;
 
