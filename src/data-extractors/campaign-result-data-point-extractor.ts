@@ -3,6 +3,7 @@ import flow from "lodash/fp/flow";
 import groupBy from "lodash/fp/groupBy";
 import map from "lodash/fp/map";
 import sumBy from "lodash/fp/sumBy";
+import head from "lodash/fp/head";
 import { CampaignResultColumns } from '../api-client/campaign-result-columns';
 import { CampaignResult } from '../model/campaign-result';
 
@@ -17,7 +18,7 @@ export const extractCampaignResultDataPoints = (campaignResults: CampaignResult[
     groupBy(CampaignResultColumns.Date),
     map((grouped: any[]) => {
       return {
-        date: grouped[0].date,
+        date: head(grouped).date,
         clicks: flow(sumBy((campaignResult: CampaignResult) => campaignResult.clicks))(grouped),
         impressions: flow(sumBy((campaignResult: CampaignResult) => campaignResult.impressions))(grouped),
       }

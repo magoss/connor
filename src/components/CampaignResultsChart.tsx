@@ -3,6 +3,7 @@ import { ChartData } from 'chart.js';
 import { Line } from "react-chartjs-2";
 import formatDate from 'date-fns/format'
 import { DataPoint } from '../model/data-point';
+import ChartContainer from './ChartContainer';
 
 type Props = {
   dataPoints: DataPoint[],
@@ -19,14 +20,14 @@ const CampaignResultsChart: React.FC<Props> = ({dataPoints}) => {
         label: "Clicks",
         data: dataPoints.map((dp: DataPoint) => dp.clicks),
         fill: true,
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)"
+        backgroundColor: "#FFDC73",
+        borderColor: "#FFBF00"
       },
       {
         label: "Impressions",
         data: dataPoints.map((dp: DataPoint) => dp.impressions),
         fill: false,
-        borderColor: "#742774"
+        borderColor: "#444444"
       }]
     }
   }
@@ -36,12 +37,12 @@ const CampaignResultsChart: React.FC<Props> = ({dataPoints}) => {
   }, [dataPoints]);
 
   return (
-    <>
+    <ChartContainer>
       <Line data={chartData}
-        height={300}
-        width={750}
+        height={400}
+        width={900}
       />
-    </>
+    </ChartContainer>
   );
 }
 

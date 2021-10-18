@@ -5,7 +5,8 @@ import * as repository from '../api-client/campaign-result.repository';
 import { CampaignResult } from "../model/campaign-result";
 import * as extractor from '../data-extractors/campaign-result-data-point-extractor';
 import { DataPoint } from "../model/data-point";
-import CampaignResultsChart from "./CampaignResultsChart";
+import CampaignResultsChart from "../components/CampaignResultsChart";
+import FilterPanel from "../components/FilterPanel";
 
 describe("Dashboard", () => {
   let mockCampaignResults: CampaignResult[],
@@ -45,5 +46,11 @@ describe("Dashboard", () => {
     const wrapper = shallow(<Dashboard />);
     const chart = wrapper.find(CampaignResultsChart);
     expect(chart.exists()).toBe(true);
+  });
+
+  it("renders FilterPanel", () => {
+    const wrapper = shallow(<Dashboard />);
+    const panel = wrapper.find(FilterPanel);
+    expect(panel.exists()).toBe(true);
   });
 });

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {getCampaignResults} from '../api-client/campaign-result.repository';
 import {CampaignResult} from '../model/campaign-result';
-import { DataPoint } from '../model/data-point';
-import { extractCampaignResultDataPoints } from '../data-extractors/campaign-result-data-point-extractor';
-import CampaignResultsChart from './CampaignResultsChart';
+import {DataPoint} from '../model/data-point';
+import {extractCampaignResultDataPoints} from '../data-extractors/campaign-result-data-point-extractor';
+import CampaignResultsChart from '../components/CampaignResultsChart';
+import FilterPanel from '../components/FilterPanel';
+import Content from '../components/Content';
 
 const Dashboard: React.FC = () => {
 
   const [campaignResults, setCampaignResults] = useState<CampaignResult[]>([]);
   const [dataPoints, setDataPoints] = useState<DataPoint[]>([]);
-  const [selectedDatasources, setSelectedDatasources] = useState<string[]>(["Google Analytics"]);
-  const [selectedCampaigns, setSelectedCampaigns] = useState<string[]>(["Offer Campaigns - Conversions", "B2B - Leads"]);
+  const [selectedDatasources, setSelectedDatasources] = useState<string[]>([]);
+  const [selectedCampaigns, setSelectedCampaigns] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -20,16 +22,21 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const filteredData: DataPoint[] = extractCampaignResultDataPoints(campaignResults, selectedDatasources, selectedCampaigns);
-    setDataPoints(filteredData);
+    const filteredDataPoints: DataPoint[] = extractCampaignResultDataPoints(campaignResults, selectedDatasources, selectedCampaigns);
+    setDataPoints(filteredDataPoints);
   }, [campaignResults, selectedDatasources, selectedCampaigns]);
 
+  const filterHandler = (selectedDatasources: string[], selectedCampaigns: string[]) => {
+    setSelectedDatasources(selectedDatasources);
+    setSelectedCampaigns(selectedCampaigns);
+  }
+
   return (
-    <>
-      <div className="chart-container">
-        <CampaignResultsChart dataPoints={dataPoints} />
-      </div>
-    </>
+    <Content>
+      <FilterPanel campaignResults={campaignResults}
+        onFilterChange={filterHandler} />
+      <CampaignResultsChart dataPoints={dataPoints} />
+    </Content>
   );
 }
 

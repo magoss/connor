@@ -1,3 +1,10 @@
+# How to open up the application locally in development mode
+
+1. Install dependency packages using lockfile `yarn install --frozen-lockfile`
+2. Run the app by `yarn start`
+3. Navigate to [http://localhost:3000](http://localhost:3000)
+4. Enjoy :)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -5,6 +12,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `yarn install --frozen-lockfile`
+
+In order to install dependency packages using lockfile
 
 ### `yarn start`
 
